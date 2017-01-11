@@ -10,6 +10,9 @@ public class Window extends JComponent implements MouseListener {
 	int imageX, imageY;
 	Image image;
 	
+	JButton btnCityHall;
+	JButton btnSchool;
+	
 	public Window() {
 		/** 
 		 * setting the correct images to their corresponding buttons. These will be school and CityHall
@@ -46,7 +49,7 @@ public class Window extends JComponent implements MouseListener {
 		
 		cityFrame.getContentPane().setLayout(gridBagLayout);
 		
-		JButton btnSchool = new JButton(citySchool);
+		btnSchool = new JButton(citySchool);
 		GridBagConstraints gbc_btnSchool = new GridBagConstraints();
 		gbc_btnSchool.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSchool.gridx = 1;
@@ -60,7 +63,7 @@ public class Window extends JComponent implements MouseListener {
 		addMouseListener(this);
 		
 		
-		JButton btnCityHall = new JButton(btnHall);
+		btnCityHall = new JButton(btnHall);
 		GridBagConstraints gbc_btnCityHall = new GridBagConstraints();
 		gbc_btnCityHall.gridx = 8;
 		gbc_btnCityHall.gridy = 4;
