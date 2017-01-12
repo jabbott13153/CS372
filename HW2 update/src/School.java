@@ -1,7 +1,12 @@
 import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.net.URL;
+
 
 public class School extends Building{
-ArrayList<String> occupants = new ArrayList<String>();
+ArrayList<Person> occupants = new ArrayList<Person>();
 	String Name;
 	String Address;
 	
@@ -11,15 +16,11 @@ ArrayList<String> occupants = new ArrayList<String>();
 
 
 	//get and set methods for occupants
-	public void addOccupants(String n){
+	public void addOccupants(Person n){
 		occupants.add(n);
 	}
 	
-	public void getOccupants(){
-		System.out.printf("In School: \n");
-		for(int i = 0; i < occupants.size(); i++){
-			System.out.println(occupants.get(i) + " ");
-		}
-		System.out.printf("\n\n");
+	public ArrayList<Person> getOccupants(){
+		return occupants;
 	}
 }

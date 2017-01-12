@@ -1,8 +1,13 @@
+import java.awt.Image;
+
+import javax.swing.*;
 
 public class Person {
 	String Name = "";
 	int Age = 0;
 	String PhoneNumber = "";
+	//Icon image = new ImageIcon();
+	myJButton button;
 	
 	//default constructor
 	Person(){
@@ -39,5 +44,12 @@ public class Person {
 	}
 	public String getPhoneNumber(){
 		return PhoneNumber;
+	}
+	//d.)image
+	public void setButton(myJButton b){
+		button = b;
+	}
+	public myJButton getButton(){
+		return button;
 	}
 }

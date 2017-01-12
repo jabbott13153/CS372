@@ -3,9 +3,7 @@ import java.util.ArrayList;
  * City is where all of the other classes will be implemented
  * */
 public class City {
-
-public static void main(String[] args){
-		
+	public static void main(String[] args){
 	Police CityPolice[] = {new Police("Gary Johnson", 67, "2532239"),
 			new Police("Libby Walters", 25, "5555555"),
 			new Police("Aleisha Smith", 66, "54482266"),
@@ -38,15 +36,15 @@ public static void main(String[] args){
 	
 	
 	for(int i = 0; i < SchoolTeacher.length; i++){
-		jordanElbrige.addOccupants(SchoolTeacher[i].getName());
+		jordanElbrige.addOccupants(SchoolTeacher[i]);
 			
 	}
 	for(int j = 0; j < SchoolKids.length; j++){
-		jordanElbrige.addOccupants(SchoolKids[j].getName());
+		jordanElbrige.addOccupants(SchoolKids[j]);
 	}
 	
 	for(int k = 0; k < CityPolice.length; k++){
-		spokaneCityHall.addOccupants(CityPolice[k].getName());
+		spokaneCityHall.addOccupants(CityPolice[k]);
 	}
 	
 	jordanElbrige.getOccupants();
