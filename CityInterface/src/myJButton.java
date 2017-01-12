@@ -12,6 +12,7 @@ public class myJButton extends JButton {
 		 Police myPolice;
 		 Teacher myTeacher;
 		 Kid myKid;
+		 Person myPerson;
 		
 		/**
 		 * Setters for all variables
@@ -38,6 +39,9 @@ public class myJButton extends JButton {
 		public void setKid(Kid k){
 			myKid = k;
 		}
+		public void setPerson(Person p){
+			myPerson = p;
+		}
 		/**
 		 * getters for all variables except icon
 		 * @return
@@ -50,6 +54,9 @@ public class myJButton extends JButton {
 		}
 		public String getBuildingA(){
 			return myBuilding.getAddress();
+		}
+		public Person getPerson(){
+			return myPerson;
 		}
 		/*
 		public CityHall getcHall(){
@@ -74,6 +81,9 @@ public class myJButton extends JButton {
 		 * @param i
 		 * @param s
 		 */
+		myJButton(Icon i){
+			setIcon(i);		}
+		
 		myJButton(Icon i, Building b){
 			setIcon(i);
 			setBuilding(b);
@@ -114,6 +124,11 @@ public class myJButton extends JButton {
 		myJButton(Icon i, Teacher t){
 			setIcon(i);
 			setTeacher(t);
+		}
+		
+		myJButton(Icon i, Person p){
+			setIcon(i);
+			setPerson(p);
 		}
 		public void bOccupants(){
 		if(myBuilding == (School)myBuilding){

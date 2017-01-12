@@ -1,18 +1,29 @@
 
 import java.awt.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
+
 
 public class Window extends JComponent implements MouseListener {
 	
 	int imageX, imageY;
 	Image image;
 	
-	JButton btnCityHall;
-	JButton btnSchool;
+	static myJButton btnCityHall;
+	static myJButton btnSchool;
 	
+	static ArrayList<Person[]> cityPeople;
+	static ArrayList<Building> cityBuilding;
+	
+	
+	static School jordanElbrige = new School("Jordan Elbridge", "10013 Jordan Road");
+	static CityHall spokaneCityHall = new CityHall("Spokane City Hall", "125 Freya Street");
+	
+	
+	static int imageWidth = 160, imageHeight = 160;
 	public Window() {
 		/** 
 		 * setting the correct images to their corresponding buttons. These will be school and CityHall
@@ -49,7 +60,8 @@ public class Window extends JComponent implements MouseListener {
 		
 		cityFrame.getContentPane().setLayout(gridBagLayout);
 		
-		btnSchool = new JButton(citySchool);
+		btnSchool = new myJButton(citySchool, jordanElbrige);
+		jordanElbrige.setButton(btnSchool);
 		GridBagConstraints gbc_btnSchool = new GridBagConstraints();
 		gbc_btnSchool.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSchool.gridx = 1;
@@ -63,7 +75,8 @@ public class Window extends JComponent implements MouseListener {
 		addMouseListener(this);
 		
 		
-		btnCityHall = new JButton(btnHall);
+		btnCityHall = new myJButton(btnHall, spokaneCityHall);
+		spokaneCityHall.setButton(btnCityHall);
 		GridBagConstraints gbc_btnCityHall = new GridBagConstraints();
 		gbc_btnCityHall.gridx = 8;
 		gbc_btnCityHall.gridy = 4;
@@ -86,28 +99,47 @@ public class Window extends JComponent implements MouseListener {
 		cityFrame.setSize(800, 500);
 		cityFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		cityFrame.setVisible(true);
-	}
-		
-	static int imageWidth=160, imageHeight=160;
-	public static void main(String[] args){
-		
-		Window w = new Window();
-		generatePeople(CityPeople);
+
 		
 		
 	}
+		
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if( e.getSource() == btnCityHall){
-			cityHallFrame(CityPeople);
-		}
-		if(e.getSource() == btnSchool){
-			schoolFrame(CityPeople);
-		}
 		
-		
+		if(e.getSource() instanceof myJButton){
+			JFrame frame = new JFrame();
+			myJButton b = (myJButton)e.getSource();
+			JButton tbutton = new JButton(b.getBuildingName());
+			JButton tbutton2 = new JButton(b.getBuildingA());
+			frame.add(tbutton);
+			frame.add(tbutton2);
+			
+			frame.setLayout(new FlowLayout());
+			frame.setSize(300, 300);
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		}	
+		if(e.getSource() instanceof myJButton){
+			myJButton b = (myJButton)e.getSource();
+			if(b.getBuilding() == (School)b.getBuilding()){
+				schoolFrame();
+				
+			}
+			if(b.getBuilding() == (CityHall)b.getBuilding()){
+				cityHallFrame();
+			}
+		}
+			
 	}
+			
+				
+
+	
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -116,6 +148,7 @@ public class Window extends JComponent implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
@@ -128,37 +161,38 @@ public class Window extends JComponent implements MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 	/**
 	 * a method to show a new frame on the screen when the school button is pressed
 	 * will also display all people inside of school
 	 */
-	public void schoolFrame(ArrayList<Person> p){
-		JFrame schoolFrame = new JFrame("The City School");
-		
-		for(int i = 0; i < p.size(); i++){
-			if(p.get(i) instanceof Kid || p.get(i) instanceof Teacher)
-				schoolFrame.add(p.get(i).getButton());
-		}
-		schoolFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-	}
-	/**
-	 * a method to show a new frame on the screen when the city hall button is pressed
-	 * will also display all people inside of school
-	 */
-	public void cityHallFrame(ArrayList<Person> p){
-		JFrame cityHallFrame = new JFrame("The City Hall");
-		
-		for(int j = 0; j < p.size(); j++){
-		if(p.get(j) instanceof Police)
-			cityHallFrame.add(p.get(j).getButton());
-		}
-		cityHallFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-	}
-	public void createMainWindow(){
-		
+public void schoolFrame(ArrayList<myJButton> b){
+	JFrame schoolFrame = new JFrame("The City School");
+	
+	for(int i = 0; i < b.size(); i++){
+		schoolFrame.add(b.get(i));
 	}
 	
+	schoolFrame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+}
+/**
+ * a method to show a new frame on the screen when the city hall button is pressed
+ * will also display all people inside of school
+ */
+public void cityHallFrame(ArrayList<Person[]> p){
+	JFrame cityHallFrame = new JFrame("The City Hall");
+	
+	
+	for(int j = 0; j < p.size(); j++){
+	if(p.get(j)[j] instanceof Police)
+		cityHallFrame.add(p.get(j)[j].getButton());
 	}
+	cityHallFrame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+}
+
+	
+	
+
 	/**
 	 * redefining paint method from JComponent.
 	 * Will be used to drag the city people around to different buildings
@@ -172,3 +206,4 @@ public class Window extends JComponent implements MouseListener {
 
 	}*/
 
+}

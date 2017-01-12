@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class CreatePeople{
+public class CreatePeople implements MouseListener{
 	/**
 	 * creating a class that will generate the images of the city people.
 	 * Will need HW2 update in order to work
@@ -29,7 +29,8 @@ public class CreatePeople{
 	static String police = "/resources/police_in_building_2.gif";
 	static String teacher = "/resources/teacher_f.gif";
 	   
-	static ArrayList<myJButton> People; 
+	static ArrayList<myJButton> schoolPeople; 
+	static ArrayList<myJButton> cityHallPeople;
 	/**
 	 * creating images for the police, teacher, and kid.
 	 */
@@ -53,17 +54,22 @@ public class CreatePeople{
 	  * The method to be used to create all images of the city people, and to assign them to the appropriate building. 
 	  * @param p
 	  */
-	 People = new ArrayList<myJButton>();
+	 schoolPeople = new ArrayList<myJButton>();
+	 cityHallPeople = new ArrayList<myJButton>();
 		 for(int i = 0; i < p.size(); i++){
-			 if(p.get(i)[i] instanceof Teacher)
-				 People.add(new myJButton(TImg, (Teacher)p.get(i)[i]));
-						 
+			 for(int j = 0;j < p.size(); j++)
+			 {
+			 if(p.get(i)[j] instanceof Teacher)
+			 {
+				schoolPeople.add(new myJButton(TImg, (Teacher)p.get(i)[i]));
+							 					 
+			 }
+			 if(p.get(i)[j] instanceof Police)
+				 cityHallPeople.add(new myJButton(PImg, (Police)p.get(i)[i]));
 			 
-			 if(p.get(i)[i] instanceof Police)
-				 People.add(new myJButton(TImg, (Police)p.get(i)[i]));
-			 
-			 if(p.get(i)[i] instanceof Kid)
-				 People.add(new myJButton(TImg, (Kid)p.get(i)[i]));
+			 if(p.get(i)[j] instanceof Kid)
+				 schoolPeople.add(new myJButton(KImg, (Kid)p.get(i)[i]));
+			 }
 			 
 		 }
 	}
@@ -73,7 +79,7 @@ public class CreatePeople{
 	 */
 public static void main(String[] args){
 		
-		Window w = new Window();
+		//Window w = new Window();
 		
 		
 		/**
@@ -156,7 +162,52 @@ public static void main(String[] args){
 				 * 
 				 */
 		generatePeople(cityPeople);
+		
+		JFrame frame = new JFrame();
+		for(int i =0; i < schoolPeople.size(); i++){
+			frame.add(schoolPeople.get(i));
+			
+		}
+		for(int i = 0; i < cityHallPeople.size(); i++)
+			frame.add(cityHallPeople.get(i));
+		frame.setVisible(true);
+		frame.setLayout(new FlowLayout());
+		frame.setSize(500, 500);
 	}
+
+	public ArrayList<myJButton> getSchoolButtonL(){
+		return schoolPeople;
+	}
+	public ArrayList<myJButton> getCityHallBL(){
+		return cityHallPeople;
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
 	 
 
