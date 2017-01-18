@@ -5,7 +5,7 @@ import java.net.URL;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Yathzee extends JComponent {
+public class Yathzee extends JComponent implements Runnable {
 	
 	private JLabel label;
 	public 	Yathzee(JLabel _label){
@@ -58,11 +58,36 @@ public class Yathzee extends JComponent {
 //		dice.add(dice5);
 //	}
 	
+	public void Window(){
+		JFrame mainFrame = new JFrame("Roll the dice.");
+		mainFrame.setVisible(true);
+		mainFrame.setLayout(new FlowLayout());
 		
+		Yathzee[] yz = new Yathzee[5];
+		for(int i = 0; i < 5; i++){
+			JLabel l = new JLabel();
+			yz[i] = new Yathzee(l);
+			this.add(l);
+		}
+		this.setVisible(true);
+		
+		for(int i =0; i < 5; i++){
+			Thread t = new Thread(yz[i]);
+			t.start();
+			try{
+				Thread.sleep(1000);
+				}
+			catch(InterruptedException ex){;}
+			
+		}
+	}
+		
+		public void run(){
+			for(int i = 10; i >= 0; i--){
+				
+			}
+		}
 		
 	}
 	
-	public static void main(String[] args){
-		
-	}
 }
