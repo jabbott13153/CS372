@@ -15,19 +15,19 @@ public class ReadIn {
         	BufferedReader rdr = new BufferedReader(ir);
         	String line = rdr.readLine();
         	
-        	while(line!= null){
-        		System.out.println(line);
+        	FileWriter fw = new FileWriter(PatternName);
+        	BufferedWriter bw = new BufferedWriter(fw);
+        	while(line != null){
+        		
+        		bw.write(line);
+        		line = rdr.readLine();
+        		System.out.printf(line);
         	}
-//        	FileWriter fw = new FileWriter(PatternName);
-//        	BufferedWriter bw = new BufferedWriter(fw);
-//        	while(line != null){
-//        		bw.write(line);
-//        	}
-        	//bw.close();
+        	bw.close();
         	rdr.close();
         }
         catch(Exception ex){System.out.printf("The computer sincerely disagrees with you, "
-        		+ "and wishes you would take your nonesense elsewhere.\n\t%s", ex.getMessage());}
+        		+ "and wishes you would take your nonesense elsewhere.\n\t%s\n", ex.getMessage());}
         
           
     }
