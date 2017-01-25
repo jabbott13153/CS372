@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class myJButton extends JButton {
-	Yarn yarn;
-	String string;
-	Needles needles;
-	Pattern pattern;
-	ArrayList<JCheckBox> ckbx = new ArrayList<JCheckBox>();
-	ArrayList<JRadioButton> rdbn = new ArrayList<JRadioButton>();
+	private Yarn yarn;
+	private String string;
+	private Needles needles;
+	private Pattern pattern;
+	private ArrayList<JCheckBox> ckbx = new ArrayList<JCheckBox>();
+	private ArrayList<JRadioButton> rdbn = new ArrayList<JRadioButton>();
 	
 	myJButton(){;}
 	myJButton(String s){

@@ -6,21 +6,25 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class YarnWindow extends JComponent implements ActionListener{
 	
-	myJButton btnYarn;
-	JButton btnAddYarn;
-	JCheckBox chckbxFavorite;
-	JCheckBox chckbxCurrentlyInUse; 
+	private myJButton btnYarn;
+	private JButton btnAddYarn;
+	private JCheckBox chckbxFavorite;
+	private JCheckBox chckbxCurrentlyInUse; 
 	private JTextField txtFiber;
 	private JTextField txtColor;
 	private JTextField txtWeight;
 	private JTextField txtBrand;
 	private JTextField txtYards;
 	private JTextField txtNumber;
+	static ItemStorage is;
+	static int count = 1;
 	ArrayList<myJButton> yarnList = new ArrayList<myJButton>();
 	YarnWindow(ItemStorage IS){
+		is = IS;
 		
 		this.populateButton(IS.getAllYarn());
 		Yarn default2Yarn = new Yarn("Blue", "Acrylic", 4, "Default2");
@@ -126,6 +130,7 @@ public class YarnWindow extends JComponent implements ActionListener{
 		gbc_chckbxCurrentlyInUse.gridy = 2;
 		panel_2.add(chckbxCurrentlyInUse, gbc_chckbxCurrentlyInUse);
 		chckbxCurrentlyInUse.addActionListener(this);
+		chckbxCurrentlyInUse.setSelected(true);
 		
 		JLabel lblWeight = new JLabel("Weight");
 		GridBagConstraints gbc_lblWeight = new GridBagConstraints();
@@ -234,7 +239,7 @@ public class YarnWindow extends JComponent implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() instanceof myJButton){
+		if(e.getSource() == btnYarn){
 			btnYarn.getYarn().getName();
 			txtFiber.setText(btnYarn.getYarn().getFiber());
 			txtColor.setText(btnYarn.getYarn().getColor());
@@ -271,7 +276,42 @@ public class YarnWindow extends JComponent implements ActionListener{
 			btnYarn.getYarn().setWeight(Integer.parseInt((txtNumber.getText())));
 		}
 
-		
+		if(e.getSource() == yarnList.get(0)){
+			yarnList.get(0).getYarn().getName();
+			txtFiber.setText(yarnList.get(0).getYarn().getFiber());
+			txtColor.setText(yarnList.get(0).getYarn().getColor());
+			txtWeight.setText(Integer.toString(btnYarn.getYarn().getWeight()));
+			txtBrand.setText(yarnList.get(0).getYarn().getBrand());
+			txtYards.setText(Integer.toString(yarnList.get(0).getYarn().getYardage()));
+			txtNumber.setText(Integer.toString(yarnList.get(0).getYarn().getYardage()));
+		}
+		if(e.getSource() == yarnList.get(1)){
+			yarnList.get(1).getYarn().getName();
+			txtFiber.setText(yarnList.get(1).getYarn().getFiber());
+			txtColor.setText(yarnList.get(1).getYarn().getColor());
+			txtWeight.setText(Integer.toString(btnYarn.getYarn().getWeight()));
+			txtBrand.setText(yarnList.get(1).getYarn().getBrand());
+			txtYards.setText(Integer.toString(yarnList.get(1).getYarn().getYardage()));
+			txtNumber.setText(Integer.toString(yarnList.get(1).getYarn().getYardage()));
+		}
+		if(e.getSource() == btnAddYarn){
+			Scanner scanner = new Scanner(System.in);
+			System.out.printf("Please enter the color of your yarn.\n");
+			String C = scanner.nextLine();
+			System.out.printf("Please enter the fiber of your yarn.\n");
+			String F = scanner.nextLine();
+			System.out.printf("Please enter the weight of your yarn as an integer.\n");
+			int W = scanner.nextInt();
+			System.out.printf("Please enter the name of your yarn.\n");
+			String N = scanner.nextLine();
+			
+			Yarn y = new Yarn(C, F, W, N);
+			is.getAllYarn().add(y);
+			
+			myJButton newButton = new myJButton(y.getName(), y);
+			
+			refreshButtonList(is.getAllYarn());
+		}
 	}
 	
 	public void populateButton(ArrayList<Yarn> an){
@@ -290,10 +330,12 @@ public class YarnWindow extends JComponent implements ActionListener{
 			{
 				myJButton jb = new myJButton(an.get(i).getName(), an.get(i));
 				jb.addActionListener(this);
-				yarnList.add(jb);
 				jb.addChkBx(chckbxFavorite);
 				jb.addChkBx(chckbxCurrentlyInUse);
 				an.get(i).setButtonified(true);
+				jb.setVisible(true);
+				yarnList.add(jb);
+				
 			}
 		}
 	}

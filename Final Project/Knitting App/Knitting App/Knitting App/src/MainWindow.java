@@ -8,16 +8,17 @@ import javax.swing.*;
 
 
 public class MainWindow extends JComponent implements ActionListener {
-	JButton btnYarn;
-	JButton btnPatterns;
-	JButton btnNeedles;
-	ItemStorage is;
+	private JButton btnYarn;
+	private JButton btnPatterns;
+	private JButton btnNeedles;
+	private ItemStorage is;
 	MainWindow(ItemStorage IS){
 	is = IS;
 		try{
 	JFrame mainWindow = new JFrame("Knitting App");
 	
 	mainWindow.getContentPane().setLayout(new BorderLayout());
+	mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 	JPanel panel = new JPanel();
 	mainWindow.getContentPane().add(panel, BorderLayout.WEST);
@@ -81,7 +82,7 @@ public class MainWindow extends JComponent implements ActionListener {
 		if(e.getSource() == btnPatterns){
 			System.out.printf("Patterns was pressed.\n");
 			PatternWindow pw = new PatternWindow(is);
-			pw.setVisible(true);
+			
 
 		}
 		if(e.getSource() == btnNeedles){

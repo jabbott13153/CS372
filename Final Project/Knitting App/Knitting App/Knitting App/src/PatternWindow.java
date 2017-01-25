@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridBagLayout;
 
-public class PatternWindow extends JComponent {
+public class PatternWindow {
 	public PatternWindow(ItemStorage IS) {
 		patternFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		patternFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
